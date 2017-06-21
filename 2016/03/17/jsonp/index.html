@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈JSONP与AJAX | Kipbase个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天无意中看到一条面试题：  为什么JSONP不是真正的AJAX？  看到这道问题想起来，没有真正具体考虑过JSONP与AJAX的区别，便想通过此段文字简单分析一下其区别。 什么是AJAX？稍微学过前端的人都知道AJAX学名是“异步的JavaScript和XML”，是一种很流行的技术，它能够不用刷新网页的情况下，就能与服务器通信获取数据，并进行网页更新。最早用在了谷歌的Gmail上，从此便流行起来">
+<meta name="keywords" content="JavaScript,AJAX,JSONP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈JSONP与AJAX">
+<meta property="og:url" content="http://kipbase.github.io/2016/03/17/jsonp/index.html">
+<meta property="og:site_name" content="Kipbase个人博客">
+<meta property="og:description" content="今天无意中看到一条面试题：  为什么JSONP不是真正的AJAX？  看到这道问题想起来，没有真正具体考虑过JSONP与AJAX的区别，便想通过此段文字简单分析一下其区别。 什么是AJAX？稍微学过前端的人都知道AJAX学名是“异步的JavaScript和XML”，是一种很流行的技术，它能够不用刷新网页的情况下，就能与服务器通信获取数据，并进行网页更新。最早用在了谷歌的Gmail上，从此便流行起来">
+<meta property="og:updated_time" content="2017-06-21T01:19:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈JSONP与AJAX">
+<meta name="twitter:description" content="今天无意中看到一条面试题：  为什么JSONP不是真正的AJAX？  看到这道问题想起来，没有真正具体考虑过JSONP与AJAX的区别，便想通过此段文字简单分析一下其区别。 什么是AJAX？稍微学过前端的人都知道AJAX学名是“异步的JavaScript和XML”，是一种很流行的技术，它能够不用刷新网页的情况下，就能与服务器通信获取数据，并进行网页更新。最早用在了谷歌的Gmail上，从此便流行起来">
+  
+    <link rel="alternate" href="/atom.xml" title="Kipbase个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kipbase个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">前端学习记录</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kipbase.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jsonp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/17/jsonp/" class="article-date">
+  <time datetime="2016-03-17T11:51:12.000Z" itemprop="datePublished">2016-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈JSONP与AJAX
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天无意中看到一条面试题：</p>
+<blockquote>
+<p>为什么JSONP不是真正的AJAX？</p>
+</blockquote>
+<p>看到这道问题想起来，没有真正具体考虑过JSONP与AJAX的区别，便想通过此段文字简单分析一下其区别。</p>
+<h1 id="什么是AJAX？"><a href="#什么是AJAX？" class="headerlink" title="什么是AJAX？"></a>什么是AJAX？</h1><p>稍微学过前端的人都知道AJAX学名是“异步的JavaScript和XML”，是一种很流行的技术，它能够不用刷新网页的情况下，就能与服务器通信获取数据，并进行网页更新。最早用在了谷歌的Gmail上，从此便流行起来。<br>简单来说，AJAX的过程就是，在用户操作浏览器的过程中，触发了某些事件，于是脚本通过一个名为XMLHttpRequest的对象，“偷偷的”与服务器进行通信，告诉服务器我需要什么数据，然后服务器做出回应，将这些数据传回给用户，然后脚本监视着返回的数据，并及时将这些数据反映在网页中。</p>
+<h1 id="什么是JSON？JSON与AJAX有什么关系？"><a href="#什么是JSON？JSON与AJAX有什么关系？" class="headerlink" title="什么是JSON？JSON与AJAX有什么关系？"></a>什么是JSON？JSON与AJAX有什么关系？</h1><p>JSON指的是“JavaScript对象表示法”，与JavaScript定义对象的语法相同，它通过JavaScript的语法来描述数据对象，但JSON独立于语言和平台，专门用来保存数据，它有着非常多的优点。</p>
+<ol>
+<li>纯文本，传输非常简单。</li>
+<li>使用 JavaScript编写，JS文件可以直接读取支持。</li>
+<li>格式简单，没有多余的内容。</li>
+<li>虽然JSON对于格式的要求非常严格，但网上有着许多的JSON生成器，能够自动规范各种数据的格式，因此编写起来也非常容易。</li>
+</ol>
+<p>JSON有着许许多多的优点，因此成为数据传输的一个首选格式，所以便与AJAX有了关系，AJAX向服务器请求数据，而服务器将JSON格式的数据发送回来，因为其原生JavaScript语法的原因，读取处理数据非常方便，因此便成为了一种最为通用的AJAX模型。</p>
+<h1 id="什么是JSONP？"><a href="#什么是JSONP？" class="headerlink" title="什么是JSONP？"></a>什么是JSONP？</h1><p>网上有许多JSONP的教程，但都是说得过于正规，各种术语，初学者有些难以理解。<br>浏览器有一个“同源政策”，不清楚这个政策不要紧，只需要知道其导致的结果，那就是当JavaScript发送AJAX请求时，其请求的URL域名必须与当前页面一样，假如我现在的网站域名是 <a href="http://my.com" target="_blank" rel="external">http://my.com</a> ，我在这个网站上不可以向其他网站请求数据，如 <a href="http://www.baidu.com/" target="_blank" rel="external">http://www.baidu.com/</a> 等等。<br>但是向外网请求数据是非常有用的，如获取一些其他网站API数据，因此必须要有一种方法解决这个问题，有一些传统方法，如使用flash，服务器端设置代理等，这些传统方法有着很多的局限性，在实际使用中并不适合，此时人们便发现了一个方法，那就是引用其他网站的js脚本文件是没有限制的，而我们通过GET方式进行请求数据以及数据选择，然后其他网站将js脚本返回，以此便可以读取其返回的数据，从而实现网页的动态更新。</p>
+<h1 id="JSONP的实现过程"><a href="#JSONP的实现过程" class="headerlink" title="JSONP的实现过程"></a>JSONP的实现过程</h1><p>从上面说的可以看出，JSONP并不是使用XMLHttpRequest对象来进行数据请求，而是通过动态引入一个js文件的来进行操作，因此其主要步骤就是建立一个script节点，设置该节点的src，也就是需要引入其他网站数据的src，然后将该节点通过appendChild操作将此标签插入到网页中，然后在事件回调函数中对其中的数据进行操作，进行网页的动态更新。</p>
+<h1 id="JSONP与AJAX的区别与联系"><a href="#JSONP与AJAX的区别与联系" class="headerlink" title="JSONP与AJAX的区别与联系"></a>JSONP与AJAX的区别与联系</h1><p>回到刚开始提到的那个问题，为什么JSONP不是真正的AJAX？<br>首先来看他们两个的表现形式，他们的表现形式其实非常相似，都是请求一个URL，获取返回数据，处理返回数据，然后将其反映在网页上，从而实现动态更新。<br>当从本质上来看，这两种技术并不相同，<strong>AJAX是通过XMLHttpRequest对象来向服务器获取内容，而JSONP是动态添加script，从而来调用服务器提供的JS脚本。</strong><br>我们来细想一个问题，那就是JSONP其实也可以用在当前网站，并不是说跨域才可以使用，获取当前网站的js脚本并添加到网页上是完全可以的，并且再深入一步，那就是这个JS脚本中完全可以用任何格式来传递数据，并不是像AJAX一样有着规定的协议，规定的格式，因此其不利于规范的提供统一的服务。<br>总之，JSONP并不是一个特殊的AJAX，其实现方式有着本质的区别。</p>
+<p><strong>注意：在许多JavaScript框架中，如Jquery、extjs等，它们将JSONP的实现封装进了自己的AJAX函数中，如在Jquery中，也是使用<code>$.ajax();</code>来进行JSONP数据的读取以及处理操作，这很容易让人混淆，因此要记住JSONP与AJAX有着本质上的区别</strong></p>
+<p>[1]: <a href="http://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000" target="_blank" rel="external"> AJAX - 廖雪峰的官方网站 </a><br>[2]: <a href="http://www.runoob.com/ajax/ajax-intro.html" target="_blank" rel="external"> AJAX 简介 | 菜鸟教程 </a><br>[3]: <a href="http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html" target="_blank" rel="external"> 说说JSON和JSONP，也许你会豁然开朗，含jQuery用例 </a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kipbase.github.io/2016/03/17/jsonp/" data-id="cj46f4nn00004v88b0vcbijh1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/27/designPattern1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          三种常用设计模式总结——MVC、MVP、MVVM（1）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/25/meta/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">meta属性详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/其它/">其它</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/其它/设计模式/">设计模式</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta属性/">meta属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JSONP/" style="font-size: 10px;">JSONP</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/meta属性/" style="font-size: 10px;">meta属性</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/10/designPattern2/">三种常用设计模式总结——MVC、MVP、MVVM（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/designPattern1/">三种常用设计模式总结——MVC、MVP、MVVM（1）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/17/jsonp/">浅谈JSONP与AJAX</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/25/meta/">meta属性详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/02/markdown/">Markdown简单介绍（首发测试）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Kipbase<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

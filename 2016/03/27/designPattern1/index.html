@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>三种常用设计模式总结——MVC、MVP、MVVM（1） | Kipbase个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介随着Web开发日益复杂化以及多元化，各种框架层出不穷，因此设计模式是在现阶段开发中非常重要的内容。  设计模式（design pattern）是对软件涉及中普遍存在（反复出现）的各种问题，所提出的解决方案 wikipedia，设计模式——维基百科  设计模式不适用代码来编写的，而是一种解决问题的方案，简单来说就是将问题分成各种模块，便于编写与控制，而各个模块的作用与如何划分模块有着各种各样的规">
+<meta name="keywords" content="设计模式,MVC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三种常用设计模式总结——MVC、MVP、MVVM（1）">
+<meta property="og:url" content="http://kipbase.github.io/2016/03/27/designPattern1/index.html">
+<meta property="og:site_name" content="Kipbase个人博客">
+<meta property="og:description" content="简介随着Web开发日益复杂化以及多元化，各种框架层出不穷，因此设计模式是在现阶段开发中非常重要的内容。  设计模式（design pattern）是对软件涉及中普遍存在（反复出现）的各种问题，所提出的解决方案 wikipedia，设计模式——维基百科  设计模式不适用代码来编写的，而是一种解决问题的方案，简单来说就是将问题分成各种模块，便于编写与控制，而各个模块的作用与如何划分模块有着各种各样的规">
+<meta property="og:image" content="http://7xpmck.com1.z0.glb.clouddn.com/MVC.png">
+<meta property="og:updated_time" content="2017-06-21T02:27:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三种常用设计模式总结——MVC、MVP、MVVM（1）">
+<meta name="twitter:description" content="简介随着Web开发日益复杂化以及多元化，各种框架层出不穷，因此设计模式是在现阶段开发中非常重要的内容。  设计模式（design pattern）是对软件涉及中普遍存在（反复出现）的各种问题，所提出的解决方案 wikipedia，设计模式——维基百科  设计模式不适用代码来编写的，而是一种解决问题的方案，简单来说就是将问题分成各种模块，便于编写与控制，而各个模块的作用与如何划分模块有着各种各样的规">
+<meta name="twitter:image" content="http://7xpmck.com1.z0.glb.clouddn.com/MVC.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Kipbase个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Kipbase个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">前端学习记录</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kipbase.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-designPattern1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/27/designPattern1/" class="article-date">
+  <time datetime="2016-03-27T04:41:20.000Z" itemprop="datePublished">2016-03-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其它/">其它</a>►<a class="article-category-link" href="/categories/其它/设计模式/">设计模式</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      三种常用设计模式总结——MVC、MVP、MVVM（1）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>随着Web开发日益复杂化以及多元化，各种框架层出不穷，因此设计模式是在现阶段开发中非常重要的内容。</p>
+<blockquote>
+<p>设计模式（design pattern）是对软件涉及中普遍存在（反复出现）的各种问题，所提出的解决方案</p>
+<p>wikipedia，<a href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="external">设计模式——维基百科</a></p>
+</blockquote>
+<p>设计模式不适用代码来编写的，而是一种解决问题的方案，简单来说就是将问题分成各种模块，便于编写与控制，而各个模块的作用与如何划分模块有着各种各样的规则，而每一个规则就为一个设计模式。<br>现阶段的Web开发中较为常用的有三种模式：MVC、MVP、MVVM。这三种模式都有着自己划分模块以及模块担当什么作用的思路，能够非常清晰的将网页进行抽象、分割，从而使编写代码更加清晰，维护也更加容易。</p>
+<hr>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p>MVC是这三种设计模式种最早出现的，当初四人帮（GoF）没有将MVC当做是一种设计模式，而把它看做使解决问题的一些类的集合。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>MVC将应用程序分为三个模块：</p>
+<ul>
+<li>M(Model)：模型层，用来储存应用程序中的数据和数据处理的方法，简单理解且片面的理解就是程序中的数据库，里面存放这应用程序中的数据，并且会根据需要进行计算改变，模型层还可以直接访问数据库。</li>
+<li>V(View)：视图层，顾名思义，视图层就是现实在眼前的层，在这个层中，能够以自己的方式读取模型层的数据，并且将其进行筛选处理并显示出来。</li>
+<li>C(Controller)：控制层，为模型层与视图层提供一个纽带，处理视图层传过来的操作，然后将数据传入模型层。</li>
+</ul>
+<h2 id="调用关系"><a href="#调用关系" class="headerlink" title="调用关系"></a>调用关系</h2><p><img src="http://7xpmck.com1.z0.glb.clouddn.com/MVC.png" alt="MVC调用关系"><br>该图片描述的非常清晰，首先摆在用户面前的是View视图层，视图层所显示的数据来自Model模型层，用户对视图层进行操作，改变了一些内容，视图层就将这些操作发送给Controller控制层，控制层根据操作计算出模型层改变的细节，也就是得出需要改变什么数据，然后将这些改变发送给模型层，从而进行改写了模型层中的数据。另一方面，视图层使用“观察者模式”一直观察着模型层，当模型层中的一些数据发生改变时，视图层观察到这些改变，从而读取改变的内容，根据改变的内容在视图层更新。<br>总结起来就是两条线路：</p>
+<ol>
+<li>用户改变视图层-&gt;视图层将改变发给控制层处理-&gt;控制层将数据改变写入模型层</li>
+<li>模型层中的一些内容发生改变-&gt;视图层观察到改变-&gt;读取改变的内容进行更新</li>
+</ol>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>从MVC的模块分工来看，MVC模式强调模块的分离，分工明确，显示——数据——处理，能够进行无缝的衔接与协调。<br>由于模块化程序非常高，因为修改难度得以降低，当某个应用逻辑需要改变时，只需要将控制层换为另一个控制层即可，不需要对视图和模型进行改变。<br>特别要注意的是在MVC结构中的模型层M，它与另外两个模块是相当独立的，它不关心自己的数据被如何显示以及如何操作。所以这可以实现“多视图同时更新”。<br>何为多视图同时更新，设想一下，每个MVC结构的程序都是一个三角形，三个模块为三个顶点，当了两个三角形所用的模型层相同，其它两个层不相同时，模型层的改变会同时影响这两个三角形中的其它层，从而实现多个视图层的同时改变。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>MVC结构的大部分缺点来自控制层的测试，假设我们对控制层进行单元测试，使其改变了模型层，当模型层改变时，是由视图层来进行响应并且更新，并不会将改变返回控制层，在有视图层UI的情况下可以通过UI进行观察，但当没有UI时就无法对视图层进行直接的判断了。<br>MVC的另一个缺点就是视图层无法独立，由于观察者模式的设计，每个视图层进用于特定的模型层，无法复用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kipbase.github.io/2016/03/27/designPattern1/" data-id="cj46f4nn20005v88bl21alo3q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVC/">MVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/10/designPattern2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          三种常用设计模式总结——MVC、MVP、MVVM（2）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/17/jsonp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">浅谈JSONP与AJAX</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HTML/">HTML</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/其它/">其它</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/其它/设计模式/">设计模式</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AJAX/">AJAX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVC/">MVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/meta属性/">meta属性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JSONP/" style="font-size: 10px;">JSONP</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/MVC/" style="font-size: 10px;">MVC</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/meta属性/" style="font-size: 10px;">meta属性</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/04/10/designPattern2/">三种常用设计模式总结——MVC、MVP、MVVM（2）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/designPattern1/">三种常用设计模式总结——MVC、MVP、MVVM（1）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/17/jsonp/">浅谈JSONP与AJAX</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/25/meta/">meta属性详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/02/02/markdown/">Markdown简单介绍（首发测试）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Kipbase<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
