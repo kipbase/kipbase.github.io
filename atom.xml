@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Kipbase个人博客</title>
+  <subtitle>前端学习记录</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://kipbase.github.io/"/>
+  <updated>2017-06-21T12:07:06.000Z</updated>
+  <id>http://kipbase.github.io/</id>
+  
+  <author>
+    <name>Kipbase</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>普通原型继承的实现原理及优缺点</title>
+    <link href="http://kipbase.github.io/2016/04/30/jsInherit/"/>
+    <id>http://kipbase.github.io/2016/04/30/jsInherit/</id>
+    <published>2016-04-30T05:29:04.000Z</published>
+    <updated>2017-06-21T12:07:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="普通原型继承的实现原理及优缺点"><a href="#普通原型继承的实现原理及优缺点" class="headerlink" title="普通原型继承的实现原理及优缺点"></a>普通原型继承的实现原理及优缺点</h1><p>JavaScript这门语言中，最有特色的内容就是其原型的设计，不同于其它常见语言（如Java、C++），JavaScript是基于原型的语言，其它语言中的类、实例等概念，在JavaScript中均有所不同。而对于继承来说，更是有着非常大的区别，因此，弄清基本的继承操作的原理对于理解原型链、this等概念有着非常大的帮助。</p>
+<h2 id="最基础的继承实现"><a href="#最基础的继承实现" class="headerlink" title="最基础的继承实现"></a>最基础的继承实现</h2><p>在JavaScript中，继承的实现方式有很多，在网上查找也可以发现，从浅入深，从易到难，甚至有近10种实现方式，而这些方式都有着自己的优缺点，对于那些较难的继承方式来说，确实非常严谨，但由于其中用到了许多复杂的概念，较难理解，并且在平时的使用中，即使使用较为简单的继承实现方式，也能够达到需求，因此最为基础的原型继承方式非常常用，必须要掌握。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>最基础的原型继承代码如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">function A() &#123;</div><div class="line">    this.one = &quot;1&quot;;</div><div class="line">    this.two = &quot;2&quot;;</div><div class="line">&#125;</div><div class="line">A.prototype.disOne = function() &#123;</div><div class="line">    console.log(this.one);</div><div class="line">&#125;;</div><div class="line">A.prototype.disTwo = function() &#123;</div><div class="line">    console.log(this.two);</div><div class="line">&#125;;</div><div class="line">function B() &#123;</div><div class="line">    this.three = &quot;3&quot;;</div><div class="line">    this.four = &quot;4&quot;;</div><div class="line">&#125;</div><div class="line">B.prototype = new A();</div><div class="line">B.prototype.constructor = B;</div><div class="line">var aB = new B();</div><div class="line">console.log(aB.one);</div><div class="line">console.log(aB.two);</div><div class="line">console.log(aB.three);</div><div class="line">console.log(aB.four);</div><div class="line">aB.disOne();</div><div class="line">aB.disTwo();</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;普通原型继承的实现原理及优缺点&quot;&gt;&lt;a href=&quot;#普通原型继承的实现原理及优缺点&quot; class=&quot;headerlink&quot; title=&quot;普通原型继承的实现原理及优缺点&quot;&gt;&lt;/a&gt;普通原型继承的实现原理及优缺点&lt;/h1&gt;&lt;p&gt;JavaScript这门语言中，最有
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://kipbase.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://kipbase.github.io/tags/JavaScript/"/>
+    
+      <category term="继承" scheme="http://kipbase.github.io/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三种常用设计模式总结——MVC、MVP、MVVM（2）</title>
+    <link href="http://kipbase.github.io/2016/04/10/designPattern2/"/>
+    <id>http://kipbase.github.io/2016/04/10/designPattern2/</id>
+    <published>2016-04-10T13:55:41.000Z</published>
+    <updated>2017-06-21T02:27:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于MVC的简介请看<br><a href="http://kipbase.github.io/2016/02/22/designPattern1/">三种常用设计模式总结——MVC、MVP、MVVM（1）</a></p>
+<h1 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h1><p>MVP是在MVC的基础上发展而来的，其结构与MVC相似，解决了MVC结构中存在的一些问题。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>MVP设计模式也将应用程序分为三个模块，并且其中的M与V这两个模块与MVC中M与V所指的模型层与视图层相同，因此其不同点为P模块</p>
+<ul>
+<li>P(Presenter)：表示器层，该层取代了MVC结构中的控制器层，该层同时提供控制器的作用和根据模型改变视图的作用。</li>
+</ul>
+<h2 id="调用关系"><a href="#调用关系" class="headerlink" title="调用关系"></a>调用关系</h2><p><img src="http://7xpmck.com1.z0.glb.clouddn.com/MVP.png" alt="MVP调用关系"><br>从该图中可以看出，在用户操作视图层，视图层将操作发送给表示器层后，表示器层所做的事情与MVC中的控制器层所做的事相同，都是计算出改变，将改变数据发送给模型层，这一顺序的控制方式与MVC相同。<br>回忆MVC中另一条线路，是模型层改变数据，然后视图层使用观察者模式观察到模型层的改变，从而视图层自己进行更新；但在MVP模式中，可以看出，当模型层进行改变时，并不是视图层对其进行观察，而是表示器层对其进行观察，表示器层观察到数据改变后，再通过View视图层提供的接口来进行界面的更新。<br>总结起来也是2条线路：</p>
+<ol>
+<li>用户改变视图层-&gt;视图层将改变发给表示器层处理-&gt;表示器层将数据改变写入模型层（与MVC结构中的第一条线路相同）</li>
+<li>模型层中的一些内容发生改变-&gt;表示器层观察到改变-&gt;表示器层读取改变的内容-&gt;表示器层使用界面层所提供的接口进行更新</li>
+</ol>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>MVP模式对MVC模式进行了改进，模块化程度依然很高，因此其有着结构化的很多优点，与MVC相同。<br>MVC结构中控制器层的调试问题是其一大缺点，这个缺点在MVP中就不存在了，因为是表示器层观察模型层的数据改变，不再依赖视图层的UI环境，在没有视图层的时候可以虚拟一个视图层，仅仅需要实现视图层的接口，然后依赖注入，从而进行完整的单元测试。<br>MVC结构中视图层无法独立是第二个问题，这个问题在MVP结构中也是不存在的，因为视图层的更新完全是表示器层控制的，而不是自己进行更新，视图层完全不知道该如何更新，也就不依赖模型层。它只需要为上层提供接口而已，因此视图层能够得以复用。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>MVP结构的缺点同样出在表示器层，从结构中可以看出来，表示器层需要进行的任务过多，除了要起到控制器的作用，还要作为视图层和模型层的中间桥梁，因此表示器层中会有许多模型改变视图，视图改变模型的逻辑，这其中的代码量会非常多，使表示器层过于臃肿与复杂，难以维护。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于MVC的简介请看&lt;br&gt;&lt;a href=&quot;http://kipbase.github.io/2016/02/22/designPattern1/&quot;&gt;三种常用设计模式总结——MVC、MVP、MVVM（1）&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;MVP&quot;&gt;&lt;a href=&quot;#MV
+    
+    </summary>
+    
+      <category term="其它" scheme="http://kipbase.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+      <category term="设计模式" scheme="http://kipbase.github.io/categories/%E5%85%B6%E5%AE%83/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://kipbase.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="MVP" scheme="http://kipbase.github.io/tags/MVP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三种常用设计模式总结——MVC、MVP、MVVM（1）</title>
+    <link href="http://kipbase.github.io/2016/03/27/designPattern1/"/>
+    <id>http://kipbase.github.io/2016/03/27/designPattern1/</id>
+    <published>2016-03-27T04:41:20.000Z</published>
+    <updated>2017-06-21T02:27:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>随着Web开发日益复杂化以及多元化，各种框架层出不穷，因此设计模式是在现阶段开发中非常重要的内容。</p>
+<blockquote>
+<p>设计模式（design pattern）是对软件涉及中普遍存在（反复出现）的各种问题，所提出的解决方案</p>
+<p>wikipedia，<a href="https://zh.wikipedia.org/wiki/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F_(%E8%AE%A1%E7%AE%97%E6%9C%BA" target="_blank" rel="external">设计模式——维基百科</a></p>
+</blockquote>
+<p>设计模式不适用代码来编写的，而是一种解决问题的方案，简单来说就是将问题分成各种模块，便于编写与控制，而各个模块的作用与如何划分模块有着各种各样的规则，而每一个规则就为一个设计模式。<br>现阶段的Web开发中较为常用的有三种模式：MVC、MVP、MVVM。这三种模式都有着自己划分模块以及模块担当什么作用的思路，能够非常清晰的将网页进行抽象、分割，从而使编写代码更加清晰，维护也更加容易。</p>
+<hr>
+<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><p>MVC是这三种设计模式种最早出现的，当初四人帮（GoF）没有将MVC当做是一种设计模式，而把它看做使解决问题的一些类的集合。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>MVC将应用程序分为三个模块：</p>
+<ul>
+<li>M(Model)：模型层，用来储存应用程序中的数据和数据处理的方法，简单理解且片面的理解就是程序中的数据库，里面存放这应用程序中的数据，并且会根据需要进行计算改变，模型层还可以直接访问数据库。</li>
+<li>V(View)：视图层，顾名思义，视图层就是现实在眼前的层，在这个层中，能够以自己的方式读取模型层的数据，并且将其进行筛选处理并显示出来。</li>
+<li>C(Controller)：控制层，为模型层与视图层提供一个纽带，处理视图层传过来的操作，然后将数据传入模型层。</li>
+</ul>
+<h2 id="调用关系"><a href="#调用关系" class="headerlink" title="调用关系"></a>调用关系</h2><p><img src="http://7xpmck.com1.z0.glb.clouddn.com/MVC.png" alt="MVC调用关系"><br>该图片描述的非常清晰，首先摆在用户面前的是View视图层，视图层所显示的数据来自Model模型层，用户对视图层进行操作，改变了一些内容，视图层就将这些操作发送给Controller控制层，控制层根据操作计算出模型层改变的细节，也就是得出需要改变什么数据，然后将这些改变发送给模型层，从而进行改写了模型层中的数据。另一方面，视图层使用“观察者模式”一直观察着模型层，当模型层中的一些数据发生改变时，视图层观察到这些改变，从而读取改变的内容，根据改变的内容在视图层更新。<br>总结起来就是两条线路：</p>
+<ol>
+<li>用户改变视图层-&gt;视图层将改变发给控制层处理-&gt;控制层将数据改变写入模型层</li>
+<li>模型层中的一些内容发生改变-&gt;视图层观察到改变-&gt;读取改变的内容进行更新</li>
+</ol>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>从MVC的模块分工来看，MVC模式强调模块的分离，分工明确，显示——数据——处理，能够进行无缝的衔接与协调。<br>由于模块化程序非常高，因为修改难度得以降低，当某个应用逻辑需要改变时，只需要将控制层换为另一个控制层即可，不需要对视图和模型进行改变。<br>特别要注意的是在MVC结构中的模型层M，它与另外两个模块是相当独立的，它不关心自己的数据被如何显示以及如何操作。所以这可以实现“多视图同时更新”。<br>何为多视图同时更新，设想一下，每个MVC结构的程序都是一个三角形，三个模块为三个顶点，当了两个三角形所用的模型层相同，其它两个层不相同时，模型层的改变会同时影响这两个三角形中的其它层，从而实现多个视图层的同时改变。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>MVC结构的大部分缺点来自控制层的测试，假设我们对控制层进行单元测试，使其改变了模型层，当模型层改变时，是由视图层来进行响应并且更新，并不会将改变返回控制层，在有视图层UI的情况下可以通过UI进行观察，但当没有UI时就无法对视图层进行直接的判断了。<br>MVC的另一个缺点就是视图层无法独立，由于观察者模式的设计，每个视图层进用于特定的模型层，无法复用。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;随着Web开发日益复杂化以及多元化，各种框架层出不穷，因此设计模式是在现阶段开发中非常重要的内容。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;
+    
+    </summary>
+    
+      <category term="其它" scheme="http://kipbase.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+      <category term="设计模式" scheme="http://kipbase.github.io/categories/%E5%85%B6%E5%AE%83/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="设计模式" scheme="http://kipbase.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="MVC" scheme="http://kipbase.github.io/tags/MVC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈JSONP与AJAX</title>
+    <link href="http://kipbase.github.io/2016/03/17/jsonp/"/>
+    <id>http://kipbase.github.io/2016/03/17/jsonp/</id>
+    <published>2016-03-17T11:51:12.000Z</published>
+    <updated>2017-06-21T01:19:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天无意中看到一条面试题：</p>
+<blockquote>
+<p>为什么JSONP不是真正的AJAX？</p>
+</blockquote>
+<p>看到这道问题想起来，没有真正具体考虑过JSONP与AJAX的区别，便想通过此段文字简单分析一下其区别。</p>
+<h1 id="什么是AJAX？"><a href="#什么是AJAX？" class="headerlink" title="什么是AJAX？"></a>什么是AJAX？</h1><p>稍微学过前端的人都知道AJAX学名是“异步的JavaScript和XML”，是一种很流行的技术，它能够不用刷新网页的情况下，就能与服务器通信获取数据，并进行网页更新。最早用在了谷歌的Gmail上，从此便流行起来。<br>简单来说，AJAX的过程就是，在用户操作浏览器的过程中，触发了某些事件，于是脚本通过一个名为XMLHttpRequest的对象，“偷偷的”与服务器进行通信，告诉服务器我需要什么数据，然后服务器做出回应，将这些数据传回给用户，然后脚本监视着返回的数据，并及时将这些数据反映在网页中。</p>
+<h1 id="什么是JSON？JSON与AJAX有什么关系？"><a href="#什么是JSON？JSON与AJAX有什么关系？" class="headerlink" title="什么是JSON？JSON与AJAX有什么关系？"></a>什么是JSON？JSON与AJAX有什么关系？</h1><p>JSON指的是“JavaScript对象表示法”，与JavaScript定义对象的语法相同，它通过JavaScript的语法来描述数据对象，但JSON独立于语言和平台，专门用来保存数据，它有着非常多的优点。</p>
+<ol>
+<li>纯文本，传输非常简单。</li>
+<li>使用 JavaScript编写，JS文件可以直接读取支持。</li>
+<li>格式简单，没有多余的内容。</li>
+<li>虽然JSON对于格式的要求非常严格，但网上有着许多的JSON生成器，能够自动规范各种数据的格式，因此编写起来也非常容易。</li>
+</ol>
+<p>JSON有着许许多多的优点，因此成为数据传输的一个首选格式，所以便与AJAX有了关系，AJAX向服务器请求数据，而服务器将JSON格式的数据发送回来，因为其原生JavaScript语法的原因，读取处理数据非常方便，因此便成为了一种最为通用的AJAX模型。</p>
+<h1 id="什么是JSONP？"><a href="#什么是JSONP？" class="headerlink" title="什么是JSONP？"></a>什么是JSONP？</h1><p>网上有许多JSONP的教程，但都是说得过于正规，各种术语，初学者有些难以理解。<br>浏览器有一个“同源政策”，不清楚这个政策不要紧，只需要知道其导致的结果，那就是当JavaScript发送AJAX请求时，其请求的URL域名必须与当前页面一样，假如我现在的网站域名是 <a href="http://my.com" target="_blank" rel="external">http://my.com</a> ，我在这个网站上不可以向其他网站请求数据，如 <a href="http://www.baidu.com/" target="_blank" rel="external">http://www.baidu.com/</a> 等等。<br>但是向外网请求数据是非常有用的，如获取一些其他网站API数据，因此必须要有一种方法解决这个问题，有一些传统方法，如使用flash，服务器端设置代理等，这些传统方法有着很多的局限性，在实际使用中并不适合，此时人们便发现了一个方法，那就是引用其他网站的js脚本文件是没有限制的，而我们通过GET方式进行请求数据以及数据选择，然后其他网站将js脚本返回，以此便可以读取其返回的数据，从而实现网页的动态更新。</p>
+<h1 id="JSONP的实现过程"><a href="#JSONP的实现过程" class="headerlink" title="JSONP的实现过程"></a>JSONP的实现过程</h1><p>从上面说的可以看出，JSONP并不是使用XMLHttpRequest对象来进行数据请求，而是通过动态引入一个js文件的来进行操作，因此其主要步骤就是建立一个script节点，设置该节点的src，也就是需要引入其他网站数据的src，然后将该节点通过appendChild操作将此标签插入到网页中，然后在事件回调函数中对其中的数据进行操作，进行网页的动态更新。</p>
+<h1 id="JSONP与AJAX的区别与联系"><a href="#JSONP与AJAX的区别与联系" class="headerlink" title="JSONP与AJAX的区别与联系"></a>JSONP与AJAX的区别与联系</h1><p>回到刚开始提到的那个问题，为什么JSONP不是真正的AJAX？<br>首先来看他们两个的表现形式，他们的表现形式其实非常相似，都是请求一个URL，获取返回数据，处理返回数据，然后将其反映在网页上，从而实现动态更新。<br>当从本质上来看，这两种技术并不相同，<strong>AJAX是通过XMLHttpRequest对象来向服务器获取内容，而JSONP是动态添加script，从而来调用服务器提供的JS脚本。</strong><br>我们来细想一个问题，那就是JSONP其实也可以用在当前网站，并不是说跨域才可以使用，获取当前网站的js脚本并添加到网页上是完全可以的，并且再深入一步，那就是这个JS脚本中完全可以用任何格式来传递数据，并不是像AJAX一样有着规定的协议，规定的格式，因此其不利于规范的提供统一的服务。<br>总之，JSONP并不是一个特殊的AJAX，其实现方式有着本质的区别。</p>
+<p><strong>注意：在许多JavaScript框架中，如Jquery、extjs等，它们将JSONP的实现封装进了自己的AJAX函数中，如在Jquery中，也是使用<code>$.ajax();</code>来进行JSONP数据的读取以及处理操作，这很容易让人混淆，因此要记住JSONP与AJAX有着本质上的区别</strong></p>
+<p>[1]: <a href="http://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000" target="_blank" rel="external"> AJAX - 廖雪峰的官方网站 </a><br>[2]: <a href="http://www.runoob.com/ajax/ajax-intro.html" target="_blank" rel="external"> AJAX 简介 | 菜鸟教程 </a><br>[3]: <a href="http://www.cnblogs.com/dowinning/archive/2012/04/19/json-jsonp-jquery.html" target="_blank" rel="external"> 说说JSON和JSONP，也许你会豁然开朗，含jQuery用例 </a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天无意中看到一条面试题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么JSONP不是真正的AJAX？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;看到这道问题想起来，没有真正具体考虑过JSONP与AJAX的区别，便想通过此段文字简单分析一下其区别。&lt;/p&gt;
+&lt;h1 id=
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://kipbase.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="http://kipbase.github.io/tags/JavaScript/"/>
+    
+      <category term="AJAX" scheme="http://kipbase.github.io/tags/AJAX/"/>
+    
+      <category term="JSONP" scheme="http://kipbase.github.io/tags/JSONP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>meta属性详解</title>
+    <link href="http://kipbase.github.io/2016/02/25/meta/"/>
+    <id>http://kipbase.github.io/2016/02/25/meta/</id>
+    <published>2016-02-25T03:48:46.000Z</published>
+    <updated>2017-06-21T01:19:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>meta标签是HTML中一个很重要的标签，它定义在每个html文档中的head区，许多初学者在学习的过程中可能不会先接触到，因为各种学习资料中更多的去介绍了html中的内容标签，而meta标签的内容并不会在网页上直接显示，所以导致很多人忽视了这个标签。<br>但如果去看那些大型网站的源码，可以发现有着许多meta标签，并且这些标签都有着很重要的意义，用好meta标签，会带来很多意想不到的效果。一个好的meta标签可以大大提高网站被搜索到的可能，还可以用其来设定页面格式以及刷新等功能，因此我们有必要对meta标签的各种属性进行了解，并在网站上灵活运用。</p>
+<hr>
+<h1 id="meta标签的属性分类"><a href="#meta标签的属性分类" class="headerlink" title="meta标签的属性分类"></a>meta标签的属性分类</h1><p>meta标签的属性分为两类，<code>http-equiv</code>属性以及<code>name</code>属性。</p>
+<h2 id="http-equiv属性"><a href="#http-equiv属性" class="headerlink" title="http-equiv属性"></a><code>http-equiv</code>属性</h2><p>顾名思义，<code>http-equiv</code>属性相当于http的头文件，它向浏览器传回了一些有用的信息，以此来使浏览器准确的显示网页内容，他的属性值为<code>content</code>，它的定义格式为：<br><code>&lt;meta http-equiv=&quot;参数&quot; content=&quot;参数变量值&quot;&gt;</code></p>
+<p>这其中常用的参数分为以下几种：</p>
+<h3 id="Expires"><a href="#Expires" class="headerlink" title="Expires"></a>Expires</h3><p>Expires属性的作用是设置该网页缓存的过期时间，如果网页过期，那么与服务器重新传输，该属性能够设定两个值：</p>
+<ul>
+<li>GMT时间，如<br><code>&lt;meta http-equiv=&quot;Expires&quot; Content=&quot;Fri, 1 Jan 2016 12:11:11 GMT&quot;&gt;</code></li>
+<li>0，数字表示多长时间后过期，如<br><code>&lt;meta http-equiv=&quot;Expires&quot; content=&quot;0&quot;&gt;</code></li>
+</ul>
+<h3 id="Content-Type"><a href="#Content-Type" class="headerlink" title="Content-Type"></a>Content-Type</h3><p>Content-Type属性用来设定页面使用的字符集，如gb2312，utf-8等，如<br><code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;</code></p>
+<h3 id="Content-Language"><a href="#Content-Language" class="headerlink" title="Content-Language"></a>Content-Language</h3><p>Content-Language属性用来设定网页所使用的语言，如<br><code>&lt;meta http-equiv=&quot;Content-Language&quot; content=&quot;zh-CN&quot;&gt;</code></p>
+<h3 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h3><p>Date属性用来制定页面创建的时间，content使用GMT时间格式，如<br><code>&lt;meta http-equiv=&quot;Date&quot; content=&quot;Fri, 1 Jan 2016 12:11:11 GMT&quot;&gt;</code></p>
+<h3 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h3><p>Cache-Control属性非常重要，用来控制网页的缓存机制，其值通常有以下几种</p>
+<ul>
+<li>public：所有内容都将被缓存</li>
+<li>private：内容只缓存到私有缓存中</li>
+<li>no-cache：所有内容都不会被缓存</li>
+<li>no-store：所有内容都不会被缓存到缓存或Internet临时文件中</li>
+</ul>
+<h3 id="Pragma"><a href="#Pragma" class="headerlink" title="Pragma"></a>Pragma</h3><p>Pragma属性是Cache-Control属性的旧版本，Pragma属性是HTTP/1.0的接口，而Cache-Control是HTTP/1.1的接口</p>
+<h3 id="Last-Modified"><a href="#Last-Modified" class="headerlink" title="Last-Modified"></a>Last-Modified</h3><p>Last-Modified属性定义网页最后一次修改的时间，属性值使用GMT时间格式，如<br><code>&lt;meta http-equiv=&quot;Last-Modified&quot; content=&quot;Fri, 1 Jan 2016 12:11:11 GMT&quot;&gt;</code></p>
+<h3 id="Refresh"><a href="#Refresh" class="headerlink" title="Refresh"></a>Refresh</h3><p>Refresh属性定义网页自动刷新时间并能够指向新的网页，如<br><code>&lt;meta http-equiv=&quot;Refresh&quot; content=&quot;2; URL=kipbase.github.io&quot;&gt;</code><br>网页会在两秒后自动刷新到指定URL地址，如果content只写入了一个数字，那么就是在n秒后刷新页面</p>
+<h3 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a>Set-Cookie</h3><p>设定一个Cookie，设定格式与JS相同，如<br><code>&lt;meta http-equiv=&quot;set-cookie&quot; content=&quot;name=kipbase;expires=Fri, 30 Dec 2011 12:00:00 GMT; path=/&quot;&gt;</code></p>
+<h3 id="Window-Target"><a href="#Window-Target" class="headerlink" title="Window-Target"></a>Window-Target</h3><p>设定显示窗口，强制页面在当前窗口以独立页面的形式显示，用于防止其他人在框架中调用自己的页面，如<br><code>&lt;meta http-equiv=&quot;Window-target&quot; content= &quot;_top&quot;&gt;</code></p>
+<h2 id="name属性"><a href="#name属性" class="headerlink" title="name属性"></a><code>name</code>属性</h2><p><code>name</code>属性用来当定义HTML文档的描述，如关键词，作者等等，其定义格式为：<br><code>&lt;meta name=&quot;参数&quot; content=&quot;参数变量值&quot;&gt;</code><br>其主要属性为以下几种</p>
+<h3 id="author"><a href="#author" class="headerlink" title="author"></a>author</h3><p>author属性用来定义作者的名字，如<br><code>&lt;meta name=&quot;author&quot; content=&quot;Kipbase&quot;&gt;</code></p>
+<h3 id="description"><a href="#description" class="headerlink" title="description"></a>description</h3><p>description属性定义页面的描述，搜索引擎会将这个描述显示在搜索结果中，如<br><code>&lt;meta name=&quot;description&quot; content=&quot;Kipbase Personal Blog&quot;&gt;</code></p>
+<h3 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h3><p>keywords属性用来定义关键词，这些关键词有主意搜索引擎对页面进行分类，如<br><code>&lt;meta name=&quot;keywords&quot; content=&quot;HTML, CSS, JavaScript&quot;&gt;</code></p>
+<h3 id="robots"><a href="#robots" class="headerlink" title="robots"></a>robots</h3><p>robots属性用来告诉搜索机器人哪些页面需要索引，哪些不需要，可选的值为all,none,index,noindex,follow,nofollow。默认为all，如<br><code>&lt;meta name=&quot;robots&quot; content=&quot;none&quot;&gt;</code></p>
+<h2 id="其它属性"><a href="#其它属性" class="headerlink" title="其它属性"></a>其它属性</h2><p>相比于基本的name和http-equiv属性，还有一些定义在特定情况下的属性，如控制缩放，控制兼容等等。<br>（待补充）</p>
+<h1 id="meta标签的作用"><a href="#meta标签的作用" class="headerlink" title="meta标签的作用"></a>meta标签的作用</h1><p>meta标签的作用主要是对网页进行一些控制，如缓存，显示窗口等等，还有就是对搜索引擎的控制，其主要作用分为以下几点。</p>
+<ul>
+<li>帮助各种搜索引擎进行准确的索引，合理的设置关键词描述等能够提高准确性，并且提高访问量。</li>
+<li>简单地实现自动刷新功能，不用使用复杂的JS。</li>
+<li>控制页面的缓存和Cookie。</li>
+<li>控制页面的显示窗口，防止框架调用。</li>
+<li>一些高级功能，如页面评级，转换动画，这些功能在这篇内容中不做赘述，有需要的可去网上进行查询。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;meta标签是HTML中一个很重要的标签，它定义在每个html文档中的head区，许多初学者在学习的过程中可能不会先接触到，因为各种学习资料中更多的去介绍了html中的内容标签，而meta标签的内容并不会在网页上直接显示，所以导致很多人忽视了这个标签。&lt;br&gt;但如果去看那些
+    
+    </summary>
+    
+      <category term="HTML" scheme="http://kipbase.github.io/categories/HTML/"/>
+    
+    
+      <category term="meta属性" scheme="http://kipbase.github.io/tags/meta%E5%B1%9E%E6%80%A7/"/>
+    
+      <category term="HTML" scheme="http://kipbase.github.io/tags/HTML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Markdown简单介绍（首发测试）</title>
+    <link href="http://kipbase.github.io/2016/02/02/markdown/"/>
+    <id>http://kipbase.github.io/2016/02/02/markdown/</id>
+    <published>2016-02-02T14:25:50.000Z</published>
+    <updated>2016-06-06T14:36:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Markdown简单介绍"><a href="#Markdown简单介绍" class="headerlink" title="Markdown简单介绍"></a>Markdown简单介绍</h1><hr>
+<p>这是第一次使用Hexo，主要是为了测试，所以就在第一篇中分享一些简单的Markdown内容。<br><img src="http://7xpmck.com1.z0.glb.clouddn.com/086510262d86a381a52a3651174dbd4d.jpg" alt="Markdown Logo"></p>
+<blockquote>
+<p>Markdown是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML（或者HTML）文档”。</p>
+<p>wikipedia，<a href="http://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown——维基百科</a></p>
+</blockquote>
+<p>简而言之，Markdown的作用就是在文本编辑中加入一些特定的标签，如#，&gt;等，然后将其解析成为HTML标签，从而在文字中加入各种样式；与HTML标签不同的是，这些标签非常简单，学习成本很低，能够在短时间内掌握，从而在写作的过程中更加重视内容，而不是纠结于实现某种复杂的样式而本末倒置。</p>
+<hr>
+<h1 id="Markdown语法简单介绍"><a href="#Markdown语法简单介绍" class="headerlink" title="Markdown语法简单介绍"></a>Markdown语法简单介绍</h1><hr>
+<p>这里只对一些重要的语法进行简单介绍，但是，仅仅使用这些语法，就能够写出非常漂亮的内容。</p>
+<ol>
+<li>插入图片<br><code>![图片描述](图片地址)</code></li>
+<li>强调<br><code>*强调*  **加重强调**  ***特别强调***</code><br>或<br><code>_强调_  __加重强调__  ___特别强调___</code><br>显示效果：<br><em>强调</em> <strong>加重强调</strong>  <strong><em>特别强调</em></strong></li>
+<li>插入代码<br><code>`要插入的代码` </code></li>
+<li>标题<br><code>#一级标题</code><br><code>##二级标题</code><br>以此类推，一共有六个级别的标题。</li>
+<li>引用<br><code>&gt; 引用内容</code><br>显示效果：<blockquote>
+<p>引用内容</p>
+</blockquote>
+</li>
+<li>插入链接<br><code>[链接文字](链接地址)</code></li>
+<li>水平分割线<br>要插入水平分割线，可以在一行中输入三个或以上的短横线，星号，下划线，并且其中可以有空格。<br><code>***</code> <code>---</code> <code>___</code></li>
+</ol>
+<hr>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><hr>
+<p>Markdown是一种非常实用的工具，相比普通文本来说有着丰富的表现，相比一些office软件来说又有着极高的效率，因此对于写一些博客或者文章来说一种完美的选择。但对于初学者来说，再简单的语法也需要一个循序渐进的过程，因此需要使用一些实时预览Markdown的软件来进行编写，随时关注所写语法是否正确，是否按照自己的意图来显示；并且在此过程中，一步一步的熟悉Markdown的语法，逐渐摆脱预览核对，从而提高效率。<br>熟练的使用Markdown会使每个人产生流畅的敲击感，使每个人都想不停地写下去，从而发扬一种“文字的精神”，利用文字进行交流和分享。</p>
+<hr>
+<p><em>PS：</em> <strong>（非广告）</strong>推荐一个Markdown编辑器，也是我现在使用的，由作业部落所出品的<a href="https://www.zybuluo.com/mdeditor" target="_blank" rel="external">Cmd Markdown</a>，既有Web版，也有本地版，并且支持Windows，Linux，Mac三种系统，比较成熟，编写Markdown非常舒适。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Markdown简单介绍&quot;&gt;&lt;a href=&quot;#Markdown简单介绍&quot; class=&quot;headerlink&quot; title=&quot;Markdown简单介绍&quot;&gt;&lt;/a&gt;Markdown简单介绍&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;这是第一次使用Hexo，主要是为了测试，所以就在第
+    
+    </summary>
+    
+      <category term="其它" scheme="http://kipbase.github.io/categories/%E5%85%B6%E5%AE%83/"/>
+    
+    
+      <category term="Markdown" scheme="http://kipbase.github.io/tags/Markdown/"/>
+    
+  </entry>
+  
+</feed>
