@@ -1,0 +1,821 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,React,JSX," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Kipbase个人博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="配套代码：https://github.com/kipbase/react-stack-build学习基础：少量es6语法、node.jsReact是现在非常流行的一个框架，发展迅速，在此基础上发展出各种框架与功能，如redux、react-router等等，形成了一个完善但又复杂技术栈，初次接触React，一定会因为处理各种框架之间的关系感到困惑，此系列名为“React快速上手”，旨在对Reac">
+<meta name="keywords" content="JavaScript,React,JSX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React技术栈快速上手1——React">
+<meta property="og:url" content="http://kipbase.github.io/2016/05/30/react1/index.html">
+<meta property="og:site_name" content="Kipbase个人博客">
+<meta property="og:description" content="配套代码：https://github.com/kipbase/react-stack-build学习基础：少量es6语法、node.jsReact是现在非常流行的一个框架，发展迅速，在此基础上发展出各种框架与功能，如redux、react-router等等，形成了一个完善但又复杂技术栈，初次接触React，一定会因为处理各种框架之间的关系感到困惑，此系列名为“React快速上手”，旨在对Reac">
+<meta property="og:updated_time" content="2017-08-08T15:53:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React技术栈快速上手1——React">
+<meta name="twitter:description" content="配套代码：https://github.com/kipbase/react-stack-build学习基础：少量es6语法、node.jsReact是现在非常流行的一个框架，发展迅速，在此基础上发展出各种框架与功能，如redux、react-router等等，形成了一个完善但又复杂技术栈，初次接触React，一定会因为处理各种框架之间的关系感到困惑，此系列名为“React快速上手”，旨在对Reac">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kipbase.github.io/2016/05/30/react1/"/>
+
+
+
+
+
+  <title>React技术栈快速上手1——React | Kipbase个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kipbase个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">前端学习记录</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://kipbase.github.io/2016/05/30/react1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kipbase">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kipbase个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React技术栈快速上手1——React</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-30T23:37:07+08:00">
+                2016-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>配套代码：<a href="https://github.com/kipbase/react-stack-build" target="_blank" rel="external">https://github.com/kipbase/react-stack-build</a><br>学习基础：少量es6语法、node.js<br>React是现在非常流行的一个框架，发展迅速，在此基础上发展出各种框架与功能，如redux、react-router等等，形成了一个完善但又复杂技术栈，初次接触React，一定会因为处理各种框架之间的关系感到困惑，此系列名为“React快速上手”，旨在对React技术栈中最常用的一些框架等进行总结与学习，并理清各个框架之间的关系，快速上手React工程。<br>React技术栈的核心就是React，首先总结React相关内容，对以后各个模块的理解有着重要的作用。</p>
+<h1 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>JSX是一种JS的语法扩展，简单来说，JSX就是在JS语法中使用HTML的标签语言进行DOM节点的创建。如下所示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">const element = &lt;p&gt;Hello, world!&lt;/p&gt;;</div></pre></td></tr></table></figure><br>上面的这样代码是JS语法，但其中又有着HTML的语法。<br>这种语法的原理是将DOM元素转换为JS中的对象，如代码中的p元素会被转换成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    type: p,</div><div class="line">    props: &#123;</div><div class="line">        children: &apos;Hello, world!&apos;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>通过这种转换可以想到，每一个HTML元素只是作为对象中的type的值，因此可以将这种转换引申到各种自定义的对象，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    type: DangerButton,</div><div class="line">    props: &#123;</div><div class="line">        children: [&#123;</div><div class="line">            type: p,</div><div class="line">            ...</div><div class="line">        &#125;,&#123;</div><div class="line">            type: button,</div><div class="line">            ...</div><div class="line">        &#125;]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>这里创建了一个自定元素DangerButton，然后在这个元素中嵌套了p、button两个子元素组成此元素。<br>React创建元素的基本思想就是这样，利用JSX语法，通过创建各种自定元素，从而组成页面。</p>
+<h2 id="编译器Babel"><a href="#编译器Babel" class="headerlink" title="编译器Babel"></a>编译器Babel</h2><p>为了将JSX语法编译成通用的JS代码，因此要使用编译器对其进行编译，React在早期，开发了一套名为JSTransform，目前已经放弃维护，因此现在所使用的编译器名为Babel，非常完善，提供了更多的功能，在实际的编写程序中，JSX语法与ES6语法都需要Babel进行编译处理。</p>
+<ol>
+<li>最为简单的Babel转换方式为使用命令行转码，在全局中安装<code>babel-cli</code>：<br><code>npm install --global babel-cli</code><br>从而使用babel命令进行转换。<br>使用babel命令转换比较简单，并且在实际构建中较少使用到，因此使用方法请查阅官方文档。</li>
+<li>在<code>babel-cli</code>中还有一个命令<code>babel-node</code>，此命令可以直接运行ES6代码，因此在开发过程中会经常使用。</li>
+<li>如果想调用babel的API进行转换，那么需要在项目中安装<code>babel-core</code>包，从而使用babel提供的API进行转换，该命令一般在生成最终项目文件时（非开发）进行使用<br>在实际的开发中，babel的使用一般会被配置在自动化构建工具中，如现在最为常用的webpack，因此具体的使用在后面总结webpack是进行学习。</li>
+</ol>
+<h1 id="React创建组件的方法"><a href="#React创建组件的方法" class="headerlink" title="React创建组件的方法"></a>React创建组件的方法</h1><p>前面说过，React的基本原理就是通过JSX语法，创建自建元素，打包普通元素，从而构成一个完善的页面，而要使用React构建组件有以下三种方法：</p>
+<h2 id="React-createClass"><a href="#React-createClass" class="headerlink" title="React.createClass"></a>React.createClass</h2><p>此方法是旧版本React中所使用的方法，最为传统，兼容性也最好，但现在新的React项目中，已经很少使用此方法创建元素了，此方法的代码示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">const Button = React.createClass(&#123;</div><div class="line">    getDefaultProps() &#123;</div><div class="line">        return &#123;</div><div class="line">            color: &apos;red&apos;,</div><div class="line">            text: &apos;Confirm&apos;</div><div class="line">        &#125;;</div><div class="line">    &#125;,</div><div class="line">    render() &#123;</div><div class="line">        const &#123; color, text &#125; = this.props;</div><div class="line">        return (</div><div class="line">            &lt;button className=&#123; &quot;btn-&quot; + color &#125;&gt;</div><div class="line">                &lt;em&gt;&#123; text &#125;&lt;/em&gt;</div><div class="line">            &lt;/button&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure><br>上面的代码中创建了一个名为Button的元素，为它传入了基本的属性（第二篇介绍）color与text，然后通过render函数进行渲染，其本身为一个HTML中的button元素，但通过JSX语法，对其进行了修改定制，成为了我们的自建元素。<br>在这段代码中要注意几个问题：</p>
+<ul>
+<li>因为class和for为JS中的保留字，因此JSX中的这两个属性改为className和htmlFor。</li>
+<li>在JSX中嵌入原生JS代码，如em元素中的引用JS变量，就需要使用大括号将其包裹，这其中要注意注释也是JS语法，也要使用大括号进行包裹。</li>
+</ul>
+<h2 id="ES6语法创建元素"><a href="#ES6语法创建元素" class="headerlink" title="ES6语法创建元素"></a>ES6语法创建元素</h2><p>ES6中加入了类的概念，但要注意这个类只是JS的语法糖，依然使用了原型继承的方式，与Java等语言中的类是有区别的。<br>React提供了React.Component类来供给组件进行继承，其内部进行了简单的初始化已经必要的设置。<br>实际使用ES6语法定义组件的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">class Button extends Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">    &#125;</div><div class="line">    static defaultProps = &#123;</div><div class="line">        color: red,</div><div class="line">        text: &apos;Confirm&apos;</div><div class="line">    &#125;;</div><div class="line">    render() &#123;</div><div class="line">        const &#123; color, text &#125; = this.props;</div><div class="line">        return (</div><div class="line">            &lt;button className=&#123; &quot;btn-&quot; + color &#125;&gt;</div><div class="line">                &lt;em&gt;&#123; text &#125;&lt;/em&gt;</div><div class="line">            &lt;/button&gt;</div><div class="line">        );</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure><br>该代码与上一个旧方法的效果相同，只是使用了ES6语法，可读性来说强于旧方法，并且现在新项目多用此方法进行创建，因此需要熟悉ES6相关语法。</p>
+<h2 id="无状态函数"><a href="#无状态函数" class="headerlink" title="无状态函数"></a>无状态函数</h2><p>无状态函数是React0.14版本之后新增的，并且官方非常推荐这种方式，使用无状态函数构建的组件称为无状态组件，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Button(&#123; color = &apos;red&apos;, text = &apos;Confirm&apos; &#125;) &#123;</div><div class="line">    return (</div><div class="line">        &lt;button className=&#123; &quot;btn-&quot; + color &#125;&gt;</div><div class="line">            &lt;em&gt;&#123; text &#125;&lt;/em&gt;</div><div class="line">        &lt;/button&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>从上面的代码可以看出，无状态函数创建组件代码很简单，只传入初始状态和context（可选）两个参数，也就是说不需要state（prop和state在下篇介绍），既然没有状态，也就没有生命周期，这样定义的组件实际上就只有上面两种定义方式中的render方法。<br>无状态函数所定义的方法在调用的时候会创建一个实例，并且在创建时始终保持一个实例，避免了一些检查和内存分配，做到了内部优化，性能得到了提高。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>对于React组件来说，每一个组件只能有一个唯一的父元素；这从上面的简介可以看出，JSX组件所生成的对象有一个type属性，而这个属性的值只能是唯一的，如果想要在一个组件中渲染多个元素，那么就应该用div等元素将其包裹起来。</li>
+<li>如果JSX标签是闭合式的，那么就必须要在结尾用<code>/&gt;</code>，不可以像HTML一样省略。</li>
+</ol>
+<h1 id="React渲染组件的方法"><a href="#React渲染组件的方法" class="headerlink" title="React渲染组件的方法"></a>React渲染组件的方法</h1><p>上一节中说明了React如何使用JSX语法创建新组件，在React的概念中，这样创建的组件是虚拟DOM组件，我们还需要将其渲染在HTML上来生成页面。</p>
+<h2 id="普通渲染"><a href="#普通渲染" class="headerlink" title="普通渲染"></a>普通渲染</h2><p>对于普通渲染来说，首先要确保HTML上有一个容器元素，并且为其定义了ID，如：<br><code>&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;</code><br>设置好后即可通过React提供的API进行元素的渲染。首先要注意的是要使用‘react-dom’包，在这个包内有一个render函数专门用来渲染组件，例如将上文中生成的Button组件渲染到这个div中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import ReactDOM from &apos;react-dom&apos;;</div><div class="line">ReactDOM.render(</div><div class="line">    &lt;Button /&gt;,</div><div class="line">    document.getElementById(&apos;root&apos;)</div><div class="line">);</div></pre></td></tr></table></figure><br>注意该函数所带的两个参数，第一个参数为我们自己编写的元素，主要要使用闭合标签；第二个参数为渲染的容器元素，使用原始的<code>document.getElementById(&#39;&#39;)</code>来进行获取。</p>
+<h2 id="更新渲染"><a href="#更新渲染" class="headerlink" title="更新渲染"></a>更新渲染</h2><p>对于已经渲染好的DOM元素，如果我们想要手动更新它，就可以再次调用<code>ReactDOM.render()</code>来进行更新，react很只能，可以通过计算来只更新需要更新的元素，从而节省了系统资源。<br>而另一种自动更新的方法就是改变其state，具体内容下节介绍。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持知识分享，您的支持是对我最大的鼓励！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.png" alt="Kipbase WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.png" alt="Kipbase Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/JSX/" rel="tag"># JSX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/09/pseudoSelector/" rel="next" title="CSS伪类伪元素选择器">
+                <i class="fa fa-chevron-left"></i> CSS伪类伪元素选择器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTE4MS81NzQ4"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Kipbase" />
+          <p class="site-author-name" itemprop="name">Kipbase</p>
+           
+              <p class="site-description motion-element" itemprop="description">个人前端学习记录，包括HTML、CSS、JavaScript、Nodejs等内容。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kipbase" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JSX"><span class="nav-number">1.</span> <span class="nav-text">JSX</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器Babel"><span class="nav-number">1.2.</span> <span class="nav-text">编译器Babel</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React创建组件的方法"><span class="nav-number">2.</span> <span class="nav-text">React创建组件的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-createClass"><span class="nav-number">2.1.</span> <span class="nav-text">React.createClass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6语法创建元素"><span class="nav-number">2.2.</span> <span class="nav-text">ES6语法创建元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无状态函数"><span class="nav-number">2.3.</span> <span class="nav-text">无状态函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">2.4.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React渲染组件的方法"><span class="nav-number">3.</span> <span class="nav-text">React渲染组件的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通渲染"><span class="nav-number">3.1.</span> <span class="nav-text">普通渲染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新渲染"><span class="nav-number">3.2.</span> <span class="nav-text">更新渲染</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kipbase</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
