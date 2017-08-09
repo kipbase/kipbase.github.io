@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://kipbase.github.io/"/>
-  <updated>2017-08-09T14:23:30.000Z</updated>
+  <updated>2017-08-09T15:57:51.000Z</updated>
   <id>http://kipbase.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>jsThis</title>
+    <title>JavaScript中this的四种用法</title>
     <link href="http://kipbase.github.io/2016/06/05/jsThis/"/>
     <id>http://kipbase.github.io/2016/06/05/jsThis/</id>
     <published>2016-06-05T14:21:28.000Z</published>
-    <updated>2017-08-09T14:23:30.000Z</updated>
+    <updated>2017-08-09T15:57:51.000Z</updated>
     
     <content type="html"><![CDATA[<p>本篇文章是《JavaScript忍者秘籍》一书的读书笔记，在看书的过程中，感觉JS中this的用法与其他语言还是有一些区别，并且在JS中this的用法也有四种至多，因此在这里做一下总结与记录。</p>
 <h1 id="问题根源"><a href="#问题根源" class="headerlink" title="问题根源"></a>问题根源</h1><p>在JS中，this问题产生的根源就是函数调用方式的不同，因为在JS中函数是一等公民，也就有着相当强大的功能，总体来说，函数有四种调用方式，每种调用方式的意义均有不同，所以就产生了this的指向问题。<br>在this本身是函数调用时所传递的隐式参数，这样的参数有两个，arguments和this；所谓隐式，就是意味着这些参数不会列在函数签名内，但他们默默地传递给函数作用域内，在函数内部，它们也可以像其他显示命名的参数一样使用。<br>在这里顺路说一下arguments参数，arguments参数是传递给函数的所有参数的集合，这个参数就像一个数组一样，有自己的length属性，并且可以通过数组的方括号调用方式进行调用，甚至可以用for对其进行遍历；但需要强调的是，这个参数不是一个真正的数组，不可以对其调用数组的方法，如slice等，如果想调用这些方法，那么应该使用后面说到的apply/call方法。</p>
